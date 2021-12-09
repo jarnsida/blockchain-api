@@ -6,8 +6,8 @@
 ![Github Repository Size](https://img.shields.io/github/repo-size/evt/blockchain-api)
 ![Github Open Issues](https://img.shields.io/github/issues/evt/blockchain-api)
 ![Lines of code](https://img.shields.io/tokei/lines/github/evt/blockchain-api)
-![License](https://img.shields.io/badge/license-MIT-green)
 ![GitHub last commit](https://img.shields.io/github/last-commit/evt/blockchain-api)
+![License](https://img.shields.io/badge/license-Apache%202-blue)
 ![GitHub contributors](https://img.shields.io/github/contributors/evt/blockchain-api)
 ![Simply the best ;)](https://img.shields.io/badge/simply-the%20best%20%3B%29-orange)
 
