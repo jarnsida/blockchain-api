@@ -19,5 +19,8 @@ API-server for blockchain indexes
 
 ## HOWTO
 
+- create account on https://infura.io/
+- create new project on https://infura.io/dashboard
+- copy Ropsten endpoint from Infura project settings to `INFURA_ENDPOINT` in `docker-compose.yml`
 - run with `make run`
 
