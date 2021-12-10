@@ -3,6 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
+	"os"
+	"os/signal"
+	"syscall"
+
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/evt/blockchain-api/config"
 	"github.com/evt/blockchain-api/internal/app/handlers/grouphandler"
@@ -10,10 +15,6 @@ import (
 	"github.com/evt/blockchain-api/internal/app/services/groupservice"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
-	"log"
-	"os"
-	"os/signal"
-	"syscall"
 )
 
 func main() {

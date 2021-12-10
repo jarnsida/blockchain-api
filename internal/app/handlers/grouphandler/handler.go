@@ -1,7 +1,6 @@
 package grouphandler
 
 import (
-	"github.com/davecgh/go-spew/spew"
 	"github.com/gofiber/fiber/v2"
 	"net/http"
 	"strconv"
@@ -23,7 +22,6 @@ func New(groupService GroupService) *GroupHandler {
 func (h *GroupHandler) GetAll(c *fiber.Ctx) error {
 	groups, err := h.groupService.GetGroupIDs(c.Context())
 	if err != nil {
-		spew.Dump(err)
 		return c.Status(err.Code()).JSON(fiber.Map{
 			"error": err.Detail(),
 		})

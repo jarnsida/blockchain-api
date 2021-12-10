@@ -1,5 +1,5 @@
-abigen:
-	abigen --abi=./contract/contract.abi --pkg contract --out ./contract/contract.go
+#abigen:
+#	abigen --abi=./contract/contract.abi --pkg contract --out ./contract/contract.go
 
 run:
 	docker-compose up  --remove-orphans --build

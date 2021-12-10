@@ -10,46 +10,53 @@ type Error interface {
 	Detail() string
 }
 
-type httpError struct {
+type HttpError struct {
 	detail string
 	code   int
 }
 
-func (e httpError) Error() string {
+func NewHttpError(code int, detail string) HttpError {
+	return HttpError{
+		code:   code,
+		detail: detail,
+	}
+}
+
+func (e HttpError) Error() string {
 	return fmt.Sprintf(`code: %d, detail: '%s'`, e.code, e.detail)
 }
 
-func (e httpError) Code() int {
+func (e HttpError) Code() int {
 	return e.code
 }
 
-func (e httpError) Detail() string {
+func (e HttpError) Detail() string {
 	return e.detail
 }
 
 func NewInternal(detail string) Error {
-	return httpError{
+	return HttpError{
 		detail: detail,
 		code:   http.StatusInternalServerError,
 	}
 }
 
 func NewInternalf(template string, args ...interface{}) Error {
-	return httpError{
+	return HttpError{
 		detail: fmt.Sprintf(template, args...),
 		code:   http.StatusInternalServerError,
 	}
 }
 
 func NewNotFound(detail string) Error {
-	return httpError{
+	return HttpError{
 		detail: detail,
 		code:   http.StatusNotFound,
 	}
 }
 
 func NewBadRequest(detail string) Error {
-	return httpError{
+	return HttpError{
 		detail: detail,
 		code:   http.StatusBadRequest,
 	}
