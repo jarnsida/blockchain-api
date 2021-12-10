@@ -41,7 +41,7 @@ func (h *GroupHandler) Get(c *fiber.Ctx) error {
 	}
 
 	group, getGroupErr := h.groupService.GetGroup(c.Context(), groupID)
-	if err != nil {
+	if getGroupErr != nil {
 		return c.Status(getGroupErr.Code()).JSON(fiber.Map{
 			"error": getGroupErr.Detail(),
 		})

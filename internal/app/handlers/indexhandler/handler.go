@@ -29,7 +29,7 @@ func (h *IndexHandler) Get(c *fiber.Ctx) error {
 	}
 
 	index, getIndexErr := h.indexService.GetIndex(c.Context(), indexID)
-	if err != nil {
+	if getIndexErr != nil {
 		return c.Status(getIndexErr.Code()).JSON(fiber.Map{
 			"error": getIndexErr.Detail(),
 		})
