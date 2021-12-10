@@ -6,8 +6,8 @@ import (
 	"context"
 )
 
-// SmartContract is a smart contract.
-type SmartContract interface {
+// Repository is a repository.
+type Repository interface {
 	GetGroupIDs(context.Context) ([]int64, error)
 	GetGroup(context.Context, int64) (interface{}, error)
 }

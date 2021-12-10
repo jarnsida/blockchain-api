@@ -3,6 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/evt/blockchain-api/internal/app/handlers/indexhandler"
+	"github.com/evt/blockchain-api/internal/app/services/indexservice"
 	"log"
 	"os"
 	"os/signal"
@@ -24,9 +26,6 @@ func main() {
 }
 
 func run() error {
-	// default context
-	//defaultCtx := context.Background()
-
 	// config
 	cfg, err := config.Get()
 	if err != nil {
@@ -56,9 +55,11 @@ func run() error {
 
 	// service init
 	groupService := groupservice.New(contract)
+	indexService := indexservice.New(contract)
 
 	// handler init
 	groupHandler := grouphandler.New(groupService)
+	indexHandler := indexhandler.New(indexService)
 
 	app := fiber.New()
 	app.Use(logger.New())
@@ -66,6 +67,7 @@ func run() error {
 	// routes
 	app.Get("/groups", groupHandler.GetAll)
 	app.Get("/groups/:id", groupHandler.Get)
+	app.Get("/indexes/:id", indexHandler.Get)
 
 	log.Printf("Running HTTP server on %s\n", cfg.HTTPAddr)
 

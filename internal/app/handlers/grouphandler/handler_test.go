@@ -16,6 +16,8 @@ import (
 
 // TestGetAll tests grouphandler.GetAll
 func TestGetAll(t *testing.T) {
+	const path = "/groups"
+
 	log.SetOutput(ioutil.Discard)
 
 	ctrl := gomock.NewController(t)
@@ -25,7 +27,7 @@ func TestGetAll(t *testing.T) {
 	groupHandler := New(groupService)
 
 	app := fiber.New()
-	app.Get("/groups", groupHandler.GetAll)
+	app.Get(path, groupHandler.GetAll)
 
 	tests := []struct {
 		name   string
@@ -59,7 +61,7 @@ func TestGetAll(t *testing.T) {
 				tc.expect()
 			}
 
-			req := httptest.NewRequest("GET", "/groups", nil)
+			req := httptest.NewRequest("GET", path, nil)
 
 			res, err := app.Test(req, 1)
 			if err != nil {

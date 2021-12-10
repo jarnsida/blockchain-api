@@ -57,3 +57,12 @@ func (ec *Contract) GetGroup(ctx context.Context, id int64) (interface{}, error)
 
 	return group, nil
 }
+
+func (ec *Contract) GetIndex(ctx context.Context, id int64) (interface{}, error) {
+	index, err := ec.Contract.GetIndex(&bind.CallOpts{Context: ctx}, big.NewInt(id))
+	if err != nil {
+		return nil, fmt.Errorf("ctr.GetIndex failed: %w", err)
+	}
+
+	return index, nil
+}

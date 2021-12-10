@@ -7,31 +7,31 @@ import (
 
 // GroupService is a group service.
 type GroupService struct {
-	contract SmartContract
+	repo Repository
 }
 
 // New creates a new group service.
-func New(contract SmartContract) *GroupService {
+func New(repo Repository) *GroupService {
 	return &GroupService{
-		contract: contract,
+		repo: repo,
 	}
 }
 
-// GetGroups returns smart contract groups.
+// GetGroups returns all group IDs from repository.
 func (svc *GroupService) GetGroupIDs(ctx context.Context) ([]int64, e.Error) {
-	groupIDs, err := svc.contract.GetGroupIDs(ctx)
+	groupIDs, err := svc.repo.GetGroupIDs(ctx)
 	if err != nil {
-		return nil, e.NewInternalf("failed getting smart contract groups: %s", err)
+		return nil, e.NewInternalf("failed getting groups from repository: %s", err)
 	}
 
 	return groupIDs, nil
 }
 
-// GetGroups returns smart contract groups.
+// GetGroup returns group from repository by ID.
 func (svc *GroupService) GetGroup(ctx context.Context, id int64) (interface{}, e.Error) {
-	group, err := svc.contract.GetGroup(ctx, id)
+	group, err := svc.repo.GetGroup(ctx, id)
 	if err != nil {
-		return nil, e.NewInternalf("failed getting smart contract groups: %s", err)
+		return nil, e.NewInternalf("failed getting group from repository: %s", err)
 	}
 
 	return group, nil
