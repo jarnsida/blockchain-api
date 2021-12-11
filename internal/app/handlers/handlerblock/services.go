@@ -1,4 +1,4 @@
-//go:generate mockgen -destination=./mocks.go -source=./services.go -package=blockhandler
+//go:generate mockgen -destination=./mocks.go -source=./services.go -package=handlerblock
 
 package handlerblock
 

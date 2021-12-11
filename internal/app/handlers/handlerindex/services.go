@@ -1,4 +1,4 @@
-//go:generate mockgen -destination=./mocks.go -source=./services.go -package=indexhandler
+//go:generate mockgen -destination=./mocks.go -source=./services.go -package=handlerindex
 
 package handlerindex
 

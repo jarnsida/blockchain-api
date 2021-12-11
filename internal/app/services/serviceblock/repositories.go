@@ -1,4 +1,4 @@
-//go:generate mockgen -destination=./mocks.go -source=./repositories.go -package=blockservice
+//go:generate mockgen -destination=./mocks.go -source=./repositories.go -package=serviceblock
 
 package serviceblock
 
