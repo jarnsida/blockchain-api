@@ -8,7 +8,6 @@ import (
 	context "context"
 	reflect "reflect"
 
-	e "github.com/evt/blockchain-api/internal/e"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -36,11 +35,11 @@ func (m *MockIndexService) EXPECT() *MockIndexServiceMockRecorder {
 }
 
 // GetIndex mocks base method.
-func (m *MockIndexService) GetIndex(ctx context.Context, id int64) (interface{}, e.Error) {
+func (m *MockIndexService) GetIndex(ctx context.Context, id int64) (interface{}, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetIndex", ctx, id)
 	ret0, _ := ret[0].(interface{})
-	ret1, _ := ret[1].(e.Error)
+	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 

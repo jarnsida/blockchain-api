@@ -2,7 +2,7 @@ package indexservice
 
 import (
 	"context"
-	"github.com/evt/blockchain-api/internal/e"
+	"fmt"
 )
 
 // GroupService is a group service.
@@ -18,10 +18,10 @@ func New(repo Repository) *GroupService {
 }
 
 // GetIndex returns index from repository by ID.
-func (svc *GroupService) GetIndex(ctx context.Context, id int64) (interface{}, e.Error) {
+func (svc *GroupService) GetIndex(ctx context.Context, id int64) (interface{}, error) {
 	group, err := svc.repo.GetIndex(ctx, id)
 	if err != nil {
-		return nil, e.NewInternalf("failed getting index from repository: %s", err)
+		return nil, fmt.Errorf("failed getting index from repository: %w", err)
 	}
 
 	return group, nil

@@ -1,13 +1,12 @@
 package indexhandler
 
 import (
+	"errors"
 	"fmt"
-	"github.com/evt/blockchain-api/internal/e"
 	"github.com/stretchr/testify/assert"
 	"io"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"net/http/httptest"
 	"testing"
 
@@ -61,7 +60,7 @@ func TestGetIndex(t *testing.T) {
 		{
 			name: "error",
 			expect: func() {
-				indexService.EXPECT().GetIndex(gomock.Any(), testIndexID).Return(nil, e.NewHttpError(http.StatusInternalServerError, "test error"))
+				indexService.EXPECT().GetIndex(gomock.Any(), testIndexID).Return(nil, errors.New("test error"))
 			},
 			assert: func(content []byte) {
 				assert.Equal(t, []byte(`{"error":"test error"}`), content)

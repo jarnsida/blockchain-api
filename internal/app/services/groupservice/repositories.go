@@ -6,7 +6,7 @@ import (
 	"context"
 )
 
-// Repository is a repository.
+// Repository is a group repository.
 type Repository interface {
 	GetGroupIDs(context.Context) ([]int64, error)
 	GetGroup(context.Context, int64) (interface{}, error)

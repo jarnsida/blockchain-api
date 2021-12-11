@@ -1,6 +1,7 @@
 package grouphandler
 
 import (
+	"github.com/evt/blockchain-api/internal/app/handlers/ctx"
 	"github.com/gofiber/fiber/v2"
 	"net/http"
 	"strconv"
@@ -22,9 +23,7 @@ func New(groupService GroupService) *GroupHandler {
 func (h *GroupHandler) GetAll(c *fiber.Ctx) error {
 	groups, err := h.groupService.GetGroupIDs(c.Context())
 	if err != nil {
-		return c.Status(err.Code()).JSON(fiber.Map{
-			"error": err.Detail(),
-		})
+		return ctx.Error(c, http.StatusInternalServerError, err)
 	}
 
 	return c.JSON(groups)
@@ -35,16 +34,12 @@ func (h *GroupHandler) Get(c *fiber.Ctx) error {
 	groupIDStr := c.Params("id")
 	groupID, err := strconv.ParseInt(groupIDStr, 10, 64)
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
-			"error": err,
-		})
+		return ctx.Error(c, http.StatusBadRequest, err)
 	}
 
 	group, getGroupErr := h.groupService.GetGroup(c.Context(), groupID)
 	if getGroupErr != nil {
-		return c.Status(getGroupErr.Code()).JSON(fiber.Map{
-			"error": getGroupErr.Detail(),
-		})
+		return ctx.Error(c, http.StatusInternalServerError, getGroupErr)
 	}
 
 	return c.JSON(group)

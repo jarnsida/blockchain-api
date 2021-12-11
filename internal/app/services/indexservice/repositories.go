@@ -6,7 +6,7 @@ import (
 	"context"
 )
 
-// Repository is a repository.
+// Repository is an index repository.
 type Repository interface {
 	GetIndex(context.Context, int64) (interface{}, error)
 }

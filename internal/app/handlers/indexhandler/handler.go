@@ -1,6 +1,7 @@
 package indexhandler
 
 import (
+	"github.com/evt/blockchain-api/internal/app/handlers/ctx"
 	"github.com/gofiber/fiber/v2"
 	"net/http"
 	"strconv"
@@ -23,16 +24,12 @@ func (h *IndexHandler) Get(c *fiber.Ctx) error {
 	indexIDStr := c.Params("id")
 	indexID, err := strconv.ParseInt(indexIDStr, 10, 64)
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
-			"error": err,
-		})
+		return ctx.Error(c, http.StatusBadRequest, err)
 	}
 
 	index, getIndexErr := h.indexService.GetIndex(c.Context(), indexID)
 	if getIndexErr != nil {
-		return c.Status(getIndexErr.Code()).JSON(fiber.Map{
-			"error": getIndexErr.Detail(),
-		})
+		return ctx.Error(c, http.StatusInternalServerError, getIndexErr)
 	}
 
 	return c.JSON(index)

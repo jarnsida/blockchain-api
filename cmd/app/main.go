@@ -3,8 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/evt/blockchain-api/internal/app/handlers/blockhandler"
 	"github.com/evt/blockchain-api/internal/app/handlers/indexhandler"
+	"github.com/evt/blockchain-api/internal/app/services/blockservice"
 	"github.com/evt/blockchain-api/internal/app/services/indexservice"
+	"github.com/evt/blockchain-api/internal/pkg/contract"
 	"log"
 	"os"
 	"os/signal"
@@ -13,7 +16,6 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/evt/blockchain-api/config"
 	"github.com/evt/blockchain-api/internal/app/handlers/grouphandler"
-	"github.com/evt/blockchain-api/internal/app/pkg/contract"
 	"github.com/evt/blockchain-api/internal/app/services/groupservice"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -56,10 +58,12 @@ func run() error {
 	// service init
 	groupService := groupservice.New(contract)
 	indexService := indexservice.New(contract)
+	blockService := blockservice.New(ethClient)
 
 	// handler init
 	groupHandler := grouphandler.New(groupService)
 	indexHandler := indexhandler.New(indexService)
+	blockHandler := blockhandler.New(blockService)
 
 	app := fiber.New()
 	app.Use(logger.New())
@@ -68,6 +72,7 @@ func run() error {
 	app.Get("/groups", groupHandler.GetAll)
 	app.Get("/groups/:id", groupHandler.Get)
 	app.Get("/indexes/:id", indexHandler.Get)
+	app.Get("/blocks/:id", blockHandler.Get)
 
 	log.Printf("Running HTTP server on %s\n", cfg.HTTPAddr)
 

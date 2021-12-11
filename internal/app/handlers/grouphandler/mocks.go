@@ -8,7 +8,6 @@ import (
 	context "context"
 	reflect "reflect"
 
-	e "github.com/evt/blockchain-api/internal/e"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -36,11 +35,11 @@ func (m *MockGroupService) EXPECT() *MockGroupServiceMockRecorder {
 }
 
 // GetGroup mocks base method.
-func (m *MockGroupService) GetGroup(ctx context.Context, id int64) (interface{}, e.Error) {
+func (m *MockGroupService) GetGroup(ctx context.Context, id int64) (interface{}, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetGroup", ctx, id)
 	ret0, _ := ret[0].(interface{})
-	ret1, _ := ret[1].(e.Error)
+	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
@@ -51,11 +50,11 @@ func (mr *MockGroupServiceMockRecorder) GetGroup(ctx, id interface{}) *gomock.Ca
 }
 
 // GetGroupIDs mocks base method.
-func (m *MockGroupService) GetGroupIDs(ctx context.Context) ([]int64, e.Error) {
+func (m *MockGroupService) GetGroupIDs(ctx context.Context) ([]int64, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetGroupIDs", ctx)
 	ret0, _ := ret[0].([]int64)
-	ret1, _ := ret[1].(e.Error)
+	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 

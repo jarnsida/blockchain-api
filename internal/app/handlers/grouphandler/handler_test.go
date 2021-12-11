@@ -1,12 +1,11 @@
 package grouphandler
 
 import (
-	"github.com/evt/blockchain-api/internal/e"
+	"errors"
 	"github.com/stretchr/testify/assert"
 	"io"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"net/http/httptest"
 	"testing"
 
@@ -46,7 +45,7 @@ func TestGetAll(t *testing.T) {
 		{
 			name: "error",
 			expect: func() {
-				groupService.EXPECT().GetGroupIDs(gomock.Any()).Return(nil, e.NewHttpError(http.StatusInternalServerError, "test error"))
+				groupService.EXPECT().GetGroupIDs(gomock.Any()).Return(nil, errors.New("test error"))
 			},
 			assert: func(content []byte) {
 				assert.Equal(t, []byte(`{"error":"test error"}`), content)
