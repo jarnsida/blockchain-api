@@ -4,6 +4,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/evt/blockchain-api/internal/app/handlers/ctx"
 	"github.com/gofiber/fiber/v2"
+	"math/big"
 	"net/http"
 	"strconv"
 	"strings"
@@ -31,6 +32,11 @@ func (h *BlockHandler) Get(c *fiber.Ctx) error {
 		err         error
 	)
 	switch {
+	case blockIDStr == "latest":
+		block, err = h.blockService.GetBlockByNumber(c.Context(), nil)
+		if err != nil {
+			return ctx.Error(c, http.StatusInternalServerError, err)
+		}
 	case strings.HasPrefix(blockIDStr, "0x"):
 		blockHash = common.HexToHash(blockIDStr)
 		block, err = h.blockService.GetBlockByHash(c.Context(), blockHash)
@@ -42,7 +48,7 @@ func (h *BlockHandler) Get(c *fiber.Ctx) error {
 		if err != nil {
 			return ctx.Error(c, http.StatusBadRequest, err)
 		}
-		block, err = h.blockService.GetBlockByNumber(c.Context(), blockNumber)
+		block, err = h.blockService.GetBlockByNumber(c.Context(), big.NewInt(blockNumber))
 		if err != nil {
 			return ctx.Error(c, http.StatusInternalServerError, err)
 		}

@@ -20,8 +20,8 @@ func New(repo Repository) *BlockService {
 }
 
 // GetBlockByNumber returns block by number from repository by ID.
-func (svc *BlockService) GetBlockByNumber(ctx context.Context, number int64) (map[string]interface{}, error) {
-	block, err := svc.repo.BlockByNumber(ctx, big.NewInt(number))
+func (svc *BlockService) GetBlockByNumber(ctx context.Context, number *big.Int) (map[string]interface{}, error) {
+	block, err := svc.repo.BlockByNumber(ctx, number)
 	if err != nil {
 		return nil, fmt.Errorf("failed getting block by number from repository: %w", err)
 	}
