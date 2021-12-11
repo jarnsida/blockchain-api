@@ -19,7 +19,7 @@ func New(repo Repository) *BlockService {
 	}
 }
 
-// GetBlockByNumber returns block by number from repository by ID.
+// GetBlockByNumber returns block by number from repository.
 func (svc *BlockService) GetBlockByNumber(ctx context.Context, number *big.Int) (map[string]interface{}, error) {
 	block, err := svc.repo.BlockByNumber(ctx, number)
 	if err != nil {
@@ -32,7 +32,19 @@ func (svc *BlockService) GetBlockByNumber(ctx context.Context, number *big.Int) 
 	}, nil
 }
 
-// GetBlockByHash returns block by hash from repository by ID.
+// GetBlockHeaderByNumber returns block header by number from repository.
+func (svc *BlockService) GetBlockHeaderByNumber(ctx context.Context, number *big.Int) (map[string]interface{}, error) {
+	header, err := svc.repo.HeaderByNumber(ctx, number)
+	if err != nil {
+		return nil, fmt.Errorf("failed getting block header by number from repository: %w", err)
+	}
+
+	return map[string]interface{}{
+		"header": header,
+	}, nil
+}
+
+// GetBlockByHash returns block by hash from repository.
 func (svc *BlockService) GetBlockByHash(ctx context.Context, hash common.Hash) (map[string]interface{}, error) {
 	block, err := svc.repo.BlockByHash(ctx, hash)
 	if err != nil {
@@ -42,5 +54,17 @@ func (svc *BlockService) GetBlockByHash(ctx context.Context, hash common.Hash) (
 	return map[string]interface{}{
 		"header": block.Header(),
 		"body":   block.Body(),
+	}, nil
+}
+
+// GetBlockHeaderByHash returns block by hash from repository.
+func (svc *BlockService) GetBlockHeaderByHash(ctx context.Context, hash common.Hash) (map[string]interface{}, error) {
+	header, err := svc.repo.HeaderByHash(ctx, hash)
+	if err != nil {
+		return nil, fmt.Errorf("failed getting block header by hash from repository: %w", err)
+	}
+
+	return map[string]interface{}{
+		"header": header,
 	}, nil
 }

@@ -73,6 +73,7 @@ func run() error {
 	app.Get("/groups/:id", groupHandler.Get)
 	app.Get("/indexes/:id", indexHandler.Get)
 	app.Get("/blocks/:id", blockHandler.Get)
+	app.Get("/blocks/:id/header", blockHandler.GetHeader)
 
 	log.Printf("Running HTTP server on %s\n", cfg.HTTPAddr)
 
