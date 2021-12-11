@@ -66,3 +66,33 @@ func (mr *MockRepositoryMockRecorder) BlockByNumber(ctx, number interface{}) *go
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BlockByNumber", reflect.TypeOf((*MockRepository)(nil).BlockByNumber), ctx, number)
 }
+
+// HeaderByHash mocks base method.
+func (m *MockRepository) HeaderByHash(ctx context.Context, hash common.Hash) (*types.Header, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "HeaderByHash", ctx, hash)
+	ret0, _ := ret[0].(*types.Header)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// HeaderByHash indicates an expected call of HeaderByHash.
+func (mr *MockRepositoryMockRecorder) HeaderByHash(ctx, hash interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HeaderByHash", reflect.TypeOf((*MockRepository)(nil).HeaderByHash), ctx, hash)
+}
+
+// HeaderByNumber mocks base method.
+func (m *MockRepository) HeaderByNumber(ctx context.Context, number *big.Int) (*types.Header, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "HeaderByNumber", ctx, number)
+	ret0, _ := ret[0].(*types.Header)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// HeaderByNumber indicates an expected call of HeaderByNumber.
+func (mr *MockRepositoryMockRecorder) HeaderByNumber(ctx, number interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HeaderByNumber", reflect.TypeOf((*MockRepository)(nil).HeaderByNumber), ctx, number)
+}

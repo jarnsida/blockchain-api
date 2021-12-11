@@ -6,6 +6,7 @@ package blockhandler
 
 import (
 	context "context"
+	big "math/big"
 	reflect "reflect"
 
 	common "github.com/ethereum/go-ethereum/common"
@@ -51,7 +52,7 @@ func (mr *MockBlockServiceMockRecorder) GetBlockByHash(ctx, hash interface{}) *g
 }
 
 // GetBlockByNumber mocks base method.
-func (m *MockBlockService) GetBlockByNumber(ctx context.Context, id int64) (map[string]interface{}, error) {
+func (m *MockBlockService) GetBlockByNumber(ctx context.Context, id *big.Int) (map[string]interface{}, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetBlockByNumber", ctx, id)
 	ret0, _ := ret[0].(map[string]interface{})
@@ -63,4 +64,34 @@ func (m *MockBlockService) GetBlockByNumber(ctx context.Context, id int64) (map[
 func (mr *MockBlockServiceMockRecorder) GetBlockByNumber(ctx, id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBlockByNumber", reflect.TypeOf((*MockBlockService)(nil).GetBlockByNumber), ctx, id)
+}
+
+// GetBlockHeaderByHash mocks base method.
+func (m *MockBlockService) GetBlockHeaderByHash(ctx context.Context, hash common.Hash) (map[string]interface{}, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetBlockHeaderByHash", ctx, hash)
+	ret0, _ := ret[0].(map[string]interface{})
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetBlockHeaderByHash indicates an expected call of GetBlockHeaderByHash.
+func (mr *MockBlockServiceMockRecorder) GetBlockHeaderByHash(ctx, hash interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBlockHeaderByHash", reflect.TypeOf((*MockBlockService)(nil).GetBlockHeaderByHash), ctx, hash)
+}
+
+// GetBlockHeaderByNumber mocks base method.
+func (m *MockBlockService) GetBlockHeaderByNumber(ctx context.Context, id *big.Int) (map[string]interface{}, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetBlockHeaderByNumber", ctx, id)
+	ret0, _ := ret[0].(map[string]interface{})
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetBlockHeaderByNumber indicates an expected call of GetBlockHeaderByNumber.
+func (mr *MockBlockServiceMockRecorder) GetBlockHeaderByNumber(ctx, id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBlockHeaderByNumber", reflect.TypeOf((*MockBlockService)(nil).GetBlockHeaderByNumber), ctx, id)
 }
