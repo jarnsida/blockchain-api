@@ -1,3 +1,9 @@
+scrutinizer:
+# default target that does nothing to make scrutinizer happy
+
+generate:
+	go generate -x ./...
+
 build_app:
 	go build -race cmd/app/main.go
 
