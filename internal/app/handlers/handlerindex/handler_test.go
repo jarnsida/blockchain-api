@@ -3,7 +3,7 @@ package handlerindex
 import (
 	"errors"
 	"fmt"
-	"github.com/evt/blockchain-api/internal/pkg/model"
+	"github.com/evt/blockchain-api/internal/pkg/models"
 	"github.com/stretchr/testify/assert"
 	"io"
 	"io/ioutil"
@@ -39,7 +39,7 @@ func TestGetIndex(t *testing.T) {
 		{
 			name: "success",
 			expect: func() {
-				indexService.EXPECT().GetIndex(gomock.Any(), testIndexID).Return(&model.Index{
+				indexService.EXPECT().GetIndex(gomock.Any(), testIndexID).Return(&models.Index{
 					Name:              "DeFi Index (3)",
 					EthPriceInWei:     big.NewInt(350000000000000000),
 					UsdPriceInCents:   big.NewInt(8500),

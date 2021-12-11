@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/evt/blockchain-api/internal/abi"
-	"github.com/evt/blockchain-api/internal/pkg/model"
+	"github.com/evt/blockchain-api/internal/pkg/models"
 )
 
 // Contract is a smart contract.
@@ -38,6 +38,7 @@ func Bind(contractAddress string, backend bind.ContractBackend) (*Contract, erro
 	return &Contract{ctr}, nil
 }
 
+// GetGroupIDs returns all contract group IDs.
 func (ec *Contract) GetGroupIDs(ctx context.Context) ([]int64, error) {
 	groupIDs, err := ec.Contract.GetGroupIds(&bind.CallOpts{Context: ctx})
 	if err != nil {
@@ -53,7 +54,7 @@ func (ec *Contract) GetGroupIDs(ctx context.Context) ([]int64, error) {
 }
 
 // GetIndex fetches contract group by ID.
-func (ec *Contract) GetGroup(ctx context.Context, id int64) (*model.Group, error) {
+func (ec *Contract) GetGroup(ctx context.Context, id int64) (*models.Group, error) {
 	group, err := ec.Contract.GetGroup(&bind.CallOpts{Context: ctx}, big.NewInt(id))
 	if err != nil {
 		return nil, fmt.Errorf("ctr.GetGroup failed: %w", err)
@@ -64,7 +65,7 @@ func (ec *Contract) GetGroup(ctx context.Context, id int64) (*model.Group, error
 		return nil, fmt.Errorf("json.Marshal failed: %w", err)
 	}
 
-	var result model.Group
+	var result models.Group
 	err = json.Unmarshal(groupJSON, &result)
 	if err != nil {
 		return nil, fmt.Errorf("json.Unmarshal failed: %w", err)
@@ -74,7 +75,7 @@ func (ec *Contract) GetGroup(ctx context.Context, id int64) (*model.Group, error
 }
 
 // GetIndex fetches contract index by ID.
-func (ec *Contract) GetIndex(ctx context.Context, id int64) (*model.Index, error) {
+func (ec *Contract) GetIndex(ctx context.Context, id int64) (*models.Index, error) {
 	index, err := ec.Contract.GetIndex(&bind.CallOpts{Context: ctx}, big.NewInt(id))
 	if err != nil {
 		return nil, fmt.Errorf("ctr.GetIndex failed: %w", err)
@@ -85,7 +86,7 @@ func (ec *Contract) GetIndex(ctx context.Context, id int64) (*model.Index, error
 		return nil, fmt.Errorf("json.Marshal failed: %w", err)
 	}
 
-	var result model.Index
+	var result models.Index
 	err = json.Unmarshal(indexJSON, &result)
 	if err != nil {
 		return nil, fmt.Errorf("json.Unmarshal failed: %w", err)

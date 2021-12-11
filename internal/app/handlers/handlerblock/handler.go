@@ -3,6 +3,7 @@ package handlerblock
 import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/evt/blockchain-api/internal/app/handlers/ctx"
+	"github.com/evt/blockchain-api/internal/pkg/models"
 	"github.com/gofiber/fiber/v2"
 	"math/big"
 	"net/http"
@@ -26,7 +27,7 @@ func New(blockService BlockService) *BlockHandler {
 func (h *BlockHandler) Get(c *fiber.Ctx) error {
 	blockIDStr := c.Params("id")
 	var (
-		block       map[string]interface{}
+		block       *models.Block
 		blockNumber int64
 		blockHash   common.Hash
 		err         error
@@ -61,7 +62,7 @@ func (h *BlockHandler) Get(c *fiber.Ctx) error {
 func (h *BlockHandler) GetHeader(c *fiber.Ctx) error {
 	blockIDStr := c.Params("id")
 	var (
-		block       map[string]interface{}
+		block       *models.Block
 		blockNumber int64
 		blockHash   common.Hash
 		err         error

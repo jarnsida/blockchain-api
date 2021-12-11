@@ -8,7 +8,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	model "github.com/evt/blockchain-api/internal/pkg/model"
+	models "github.com/evt/blockchain-api/internal/pkg/models"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -36,10 +36,10 @@ func (m *MockIndexService) EXPECT() *MockIndexServiceMockRecorder {
 }
 
 // GetIndex mocks base method.
-func (m *MockIndexService) GetIndex(ctx context.Context, id int64) (*model.Index, error) {
+func (m *MockIndexService) GetIndex(ctx context.Context, id int64) (*models.Index, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetIndex", ctx, id)
-	ret0, _ := ret[0].(*model.Index)
+	ret0, _ := ret[0].(*models.Index)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

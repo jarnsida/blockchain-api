@@ -3,7 +3,7 @@ package servicegroup
 import (
 	"context"
 	"fmt"
-	"github.com/evt/blockchain-api/internal/pkg/model"
+	"github.com/evt/blockchain-api/internal/pkg/models"
 )
 
 // GroupService is a group service.
@@ -29,7 +29,7 @@ func (svc *GroupService) GetGroupIDs(ctx context.Context) ([]int64, error) {
 }
 
 // GetGroup returns group from repository by ID.
-func (svc *GroupService) GetGroup(ctx context.Context, id int64) (*model.Group, error) {
+func (svc *GroupService) GetGroup(ctx context.Context, id int64) (*models.Group, error) {
 	group, err := svc.repo.GetGroup(ctx, id)
 	if err != nil {
 		return nil, fmt.Errorf("failed getting group from repository: %w", err)

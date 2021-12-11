@@ -10,6 +10,7 @@ import (
 	reflect "reflect"
 
 	common "github.com/ethereum/go-ethereum/common"
+	models "github.com/evt/blockchain-api/internal/pkg/models"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -37,10 +38,10 @@ func (m *MockBlockService) EXPECT() *MockBlockServiceMockRecorder {
 }
 
 // GetBlockByHash mocks base method.
-func (m *MockBlockService) GetBlockByHash(ctx context.Context, hash common.Hash) (map[string]interface{}, error) {
+func (m *MockBlockService) GetBlockByHash(ctx context.Context, hash common.Hash) (*models.Block, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetBlockByHash", ctx, hash)
-	ret0, _ := ret[0].(map[string]interface{})
+	ret0, _ := ret[0].(*models.Block)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -52,10 +53,10 @@ func (mr *MockBlockServiceMockRecorder) GetBlockByHash(ctx, hash interface{}) *g
 }
 
 // GetBlockByNumber mocks base method.
-func (m *MockBlockService) GetBlockByNumber(ctx context.Context, id *big.Int) (map[string]interface{}, error) {
+func (m *MockBlockService) GetBlockByNumber(ctx context.Context, id *big.Int) (*models.Block, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetBlockByNumber", ctx, id)
-	ret0, _ := ret[0].(map[string]interface{})
+	ret0, _ := ret[0].(*models.Block)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -67,10 +68,10 @@ func (mr *MockBlockServiceMockRecorder) GetBlockByNumber(ctx, id interface{}) *g
 }
 
 // GetBlockHeaderByHash mocks base method.
-func (m *MockBlockService) GetBlockHeaderByHash(ctx context.Context, hash common.Hash) (map[string]interface{}, error) {
+func (m *MockBlockService) GetBlockHeaderByHash(ctx context.Context, hash common.Hash) (*models.Block, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetBlockHeaderByHash", ctx, hash)
-	ret0, _ := ret[0].(map[string]interface{})
+	ret0, _ := ret[0].(*models.Block)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -82,10 +83,10 @@ func (mr *MockBlockServiceMockRecorder) GetBlockHeaderByHash(ctx, hash interface
 }
 
 // GetBlockHeaderByNumber mocks base method.
-func (m *MockBlockService) GetBlockHeaderByNumber(ctx context.Context, id *big.Int) (map[string]interface{}, error) {
+func (m *MockBlockService) GetBlockHeaderByNumber(ctx context.Context, id *big.Int) (*models.Block, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetBlockHeaderByNumber", ctx, id)
-	ret0, _ := ret[0].(map[string]interface{})
+	ret0, _ := ret[0].(*models.Block)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

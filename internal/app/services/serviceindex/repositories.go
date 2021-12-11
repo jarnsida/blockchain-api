@@ -4,10 +4,10 @@ package serviceindex
 
 import (
 	"context"
-	"github.com/evt/blockchain-api/internal/pkg/model"
+	"github.com/evt/blockchain-api/internal/pkg/models"
 )
 
 // Repository is an index repository.
 type Repository interface {
-	GetIndex(context.Context, int64) (*model.Index, error)
+	GetIndex(context.Context, int64) (*models.Index, error)
 }
