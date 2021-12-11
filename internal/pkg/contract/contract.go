@@ -5,11 +5,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"math/big"
+
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/evt/blockchain-api/internal/abi"
 	"github.com/evt/blockchain-api/internal/pkg/model"
-	"math/big"
 )
 
 // Contract is a smart contract.
@@ -51,6 +52,7 @@ func (ec *Contract) GetGroupIDs(ctx context.Context) ([]int64, error) {
 	return result, nil
 }
 
+// GetIndex fetches contract group by ID.
 func (ec *Contract) GetGroup(ctx context.Context, id int64) (*model.Group, error) {
 	group, err := ec.Contract.GetGroup(&bind.CallOpts{Context: ctx}, big.NewInt(id))
 	if err != nil {
@@ -71,6 +73,7 @@ func (ec *Contract) GetGroup(ctx context.Context, id int64) (*model.Group, error
 	return &result, nil
 }
 
+// GetIndex fetches contract index by ID.
 func (ec *Contract) GetIndex(ctx context.Context, id int64) (*model.Index, error) {
 	index, err := ec.Contract.GetIndex(&bind.CallOpts{Context: ctx}, big.NewInt(id))
 	if err != nil {
