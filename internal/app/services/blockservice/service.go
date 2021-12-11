@@ -3,7 +3,6 @@ package blockservice
 import (
 	"context"
 	"fmt"
-	"github.com/davecgh/go-spew/spew"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 )
@@ -23,7 +22,6 @@ func New(repo Repository) *BlockService {
 // GetBlockByNumber returns block by number from repository by ID.
 func (svc *BlockService) GetBlockByNumber(ctx context.Context, number int64) (map[string]interface{}, error) {
 	block, err := svc.repo.BlockByNumber(ctx, big.NewInt(number))
-	spew.Dump(block)
 	if err != nil {
 		return nil, fmt.Errorf("failed getting block by number from repository: %w", err)
 	}
@@ -37,7 +35,6 @@ func (svc *BlockService) GetBlockByNumber(ctx context.Context, number int64) (ma
 // GetBlockByHash returns block by hash from repository by ID.
 func (svc *BlockService) GetBlockByHash(ctx context.Context, hash common.Hash) (map[string]interface{}, error) {
 	block, err := svc.repo.BlockByHash(ctx, hash)
-	spew.Dump(block)
 	if err != nil {
 		return nil, fmt.Errorf("failed getting block by hash from repository: %w", err)
 	}
