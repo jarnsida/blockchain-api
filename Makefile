@@ -4,11 +4,8 @@ scrutinizer:
 generate:
 	go generate -x ./...
 
-build_app:
+build:
 	go build -race cmd/app/main.go
-
-build_client:
-	go build -race cmd/client/main.go
 
 test:
 	go test -v ./...
@@ -16,13 +13,10 @@ test:
 abigen:
 	abigen --abi=./contract/contract.abi --pkg contract --out ./contract/contract.go
 
-run:
+dc:
 	docker-compose up  --remove-orphans --build
 
-run_client:
-	go run -race cmd/client/main.go
-
-run_app:
+run:
 	./run_app.sh
 
 lint:
