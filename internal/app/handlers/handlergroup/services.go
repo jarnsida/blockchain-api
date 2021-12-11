@@ -4,10 +4,11 @@ package handlergroup
 
 import (
 	"context"
+	"github.com/evt/blockchain-api/internal/pkg/model"
 )
 
 // GroupService is a group service.
 type GroupService interface {
 	GetGroupIDs(ctx context.Context) ([]int64, error)
-	GetGroup(ctx context.Context, id int64) (interface{}, error)
+	GetGroup(ctx context.Context, id int64) (*model.Group, error)
 }

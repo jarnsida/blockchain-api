@@ -11,7 +11,7 @@ test:
 	go test -v ./...
 
 abigen:
-	abigen --abi=./contract/contract.abi --pkg contract --out ./contract/contract.go
+	abigen --abi=./internal/abi/contract.abi --pkg contract --out ./internal/abi/contract.go
 
 dc:
 	docker-compose up  --remove-orphans --build

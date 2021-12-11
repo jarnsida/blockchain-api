@@ -4,10 +4,11 @@ package servicegroup
 
 import (
 	"context"
+	"github.com/evt/blockchain-api/internal/pkg/model"
 )
 
 // Repository is a group repository.
 type Repository interface {
 	GetGroupIDs(context.Context) ([]int64, error)
-	GetGroup(context.Context, int64) (interface{}, error)
+	GetGroup(context.Context, int64) (*model.Group, error)
 }

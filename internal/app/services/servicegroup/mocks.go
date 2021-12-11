@@ -8,6 +8,7 @@ import (
 	context "context"
 	reflect "reflect"
 
+	model "github.com/evt/blockchain-api/internal/pkg/model"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -35,10 +36,10 @@ func (m *MockRepository) EXPECT() *MockRepositoryMockRecorder {
 }
 
 // GetGroup mocks base method.
-func (m *MockRepository) GetGroup(arg0 context.Context, arg1 int64) (interface{}, error) {
+func (m *MockRepository) GetGroup(arg0 context.Context, arg1 int64) (*model.Group, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetGroup", arg0, arg1)
-	ret0, _ := ret[0].(interface{})
+	ret0, _ := ret[0].(*model.Group)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

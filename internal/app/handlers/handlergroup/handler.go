@@ -29,8 +29,31 @@ func (h *GroupHandler) GetAll(c *fiber.Ctx) error {
 	return c.JSON(groups)
 }
 
-// Get handles GET /group/:id request.
+// Get handles GET /groups/:id request.
 func (h *GroupHandler) Get(c *fiber.Ctx) error {
+
+	// swagger:route GET /groups/:id groups getGroups
+	//
+	// Lists all contract groups.
+	//
+	// This will show all available contract groups.
+	//
+	//     Consumes:
+	//
+	//     Produces:
+	//     - application/json
+	//
+	//     Schemes: http
+	//
+	//     Deprecated: false
+	//
+	//     Security:
+	//
+	//     Responses:
+	//       default: genericError
+	//       200: group
+	//       400: validationError
+
 	groupIDStr := c.Params("id")
 	groupID, err := strconv.ParseInt(groupIDStr, 10, 64)
 	if err != nil {

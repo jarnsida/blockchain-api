@@ -3,10 +3,12 @@ package handlerindex
 import (
 	"errors"
 	"fmt"
+	"github.com/evt/blockchain-api/internal/pkg/model"
 	"github.com/stretchr/testify/assert"
 	"io"
 	"io/ioutil"
 	"log"
+	"math/big"
 	"net/http/httptest"
 	"testing"
 
@@ -29,14 +31,6 @@ func TestGetIndex(t *testing.T) {
 	app := fiber.New()
 	app.Get("/indexes/:id", indexHandler.Get)
 
-	type index struct {
-		Name              string
-		EthPriceInWei     int64
-		UsdPriceInCents   int64
-		UsdCapitalization int64
-		PercentageChange  int64
-	}
-
 	tests := []struct {
 		name   string
 		expect func()
@@ -45,12 +39,12 @@ func TestGetIndex(t *testing.T) {
 		{
 			name: "success",
 			expect: func() {
-				indexService.EXPECT().GetIndex(gomock.Any(), testIndexID).Return(index{
+				indexService.EXPECT().GetIndex(gomock.Any(), testIndexID).Return(&model.Index{
 					Name:              "DeFi Index (3)",
-					EthPriceInWei:     350000000000000000,
-					UsdPriceInCents:   8500,
-					UsdCapitalization: 270000000,
-					PercentageChange:  25,
+					EthPriceInWei:     big.NewInt(350000000000000000),
+					UsdPriceInCents:   big.NewInt(8500),
+					UsdCapitalization: big.NewInt(270000000),
+					PercentageChange:  big.NewInt(25),
 				}, nil)
 			},
 			assert: func(content []byte) {
