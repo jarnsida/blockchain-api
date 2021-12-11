@@ -1,4 +1,4 @@
-package grouphandler
+package handlergroup
 
 import (
 	"errors"

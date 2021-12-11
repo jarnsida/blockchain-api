@@ -1,4 +1,4 @@
-package indexhandler
+package handlerindex
 
 import (
 	"errors"

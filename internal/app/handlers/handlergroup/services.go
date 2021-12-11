@@ -1,6 +1,6 @@
 //go:generate mockgen -destination=./mocks.go -source=./services.go -package=grouphandler
 
-package grouphandler
+package handlergroup
 
 import (
 	"context"

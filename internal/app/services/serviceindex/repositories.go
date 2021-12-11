@@ -1,6 +1,6 @@
 //go:generate mockgen -destination=./mocks.go -source=./repositories.go -package=indexservice
 
-package indexservice
+package serviceindex
 
 import (
 	"context"

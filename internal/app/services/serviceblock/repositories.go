@@ -1,6 +1,6 @@
 //go:generate mockgen -destination=./mocks.go -source=./repositories.go -package=blockservice
 
-package blockservice
+package serviceblock
 
 import (
 	"context"

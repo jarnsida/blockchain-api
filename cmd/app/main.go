@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/evt/blockchain-api/internal/app/handlers/blockhandler"
-	"github.com/evt/blockchain-api/internal/app/handlers/indexhandler"
-	"github.com/evt/blockchain-api/internal/app/services/blockservice"
-	"github.com/evt/blockchain-api/internal/app/services/indexservice"
+	"github.com/evt/blockchain-api/internal/app/handlers/handlerblock"
+	"github.com/evt/blockchain-api/internal/app/handlers/handlerindex"
+	"github.com/evt/blockchain-api/internal/app/services/serviceblock"
+	"github.com/evt/blockchain-api/internal/app/services/serviceindex"
 	"github.com/evt/blockchain-api/internal/pkg/contract"
 	"log"
 	"os"
@@ -15,8 +15,8 @@ import (
 
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/evt/blockchain-api/config"
-	"github.com/evt/blockchain-api/internal/app/handlers/grouphandler"
-	"github.com/evt/blockchain-api/internal/app/services/groupservice"
+	"github.com/evt/blockchain-api/internal/app/handlers/handlergroup"
+	"github.com/evt/blockchain-api/internal/app/services/servicegroup"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
@@ -56,14 +56,14 @@ func run() error {
 	}
 
 	// service init
-	groupService := groupservice.New(contract)
-	indexService := indexservice.New(contract)
-	blockService := blockservice.New(ethClient)
+	groupService := servicegroup.New(contract)
+	indexService := serviceindex.New(contract)
+	blockService := serviceblock.New(ethClient)
 
 	// handler init
-	groupHandler := grouphandler.New(groupService)
-	indexHandler := indexhandler.New(indexService)
-	blockHandler := blockhandler.New(blockService)
+	groupHandler := handlergroup.New(groupService)
+	indexHandler := handlerindex.New(indexService)
+	blockHandler := handlerblock.New(blockService)
 
 	app := fiber.New()
 	app.Use(logger.New())

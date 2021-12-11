@@ -1,6 +1,6 @@
 //go:generate mockgen -destination=./mocks.go -source=./services.go -package=blockhandler
 
-package blockhandler
+package handlerblock
 
 import (
 	"context"

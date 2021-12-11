@@ -1,4 +1,4 @@
-package groupservice
+package servicegroup
 
 import (
 	"context"

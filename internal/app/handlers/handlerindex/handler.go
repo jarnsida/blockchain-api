@@ -1,4 +1,4 @@
-package indexhandler
+package handlerindex
 
 import (
 	"github.com/evt/blockchain-api/internal/app/handlers/ctx"

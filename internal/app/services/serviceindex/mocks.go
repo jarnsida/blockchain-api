@@ -2,7 +2,7 @@
 // Source: ./repositories.go
 
 // Package indexservice is a generated GoMock package.
-package indexservice
+package serviceindex
 
 import (
 	context "context"

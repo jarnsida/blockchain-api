@@ -1,6 +1,6 @@
 //go:generate mockgen -destination=./mocks.go -source=./repositories.go -package=groupservice
 
-package groupservice
+package servicegroup
 
 import (
 	"context"

@@ -1,4 +1,4 @@
-package blockservice
+package serviceblock
 
 import (
 	"context"

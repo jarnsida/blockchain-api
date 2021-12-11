@@ -1,4 +1,4 @@
-package grouphandler
+package handlergroup
 
 import (
 	"github.com/evt/blockchain-api/internal/app/handlers/ctx"

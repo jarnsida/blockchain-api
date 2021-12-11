@@ -1,4 +1,4 @@
-package indexservice
+package serviceindex
 
 import (
 	"context"
