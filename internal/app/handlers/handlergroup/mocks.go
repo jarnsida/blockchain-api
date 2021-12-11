@@ -2,7 +2,7 @@
 // Source: ./services.go
 
 // Package grouphandler is a generated GoMock package.
-package handlergroup
+package grouphandler
 
 import (
 	context "context"

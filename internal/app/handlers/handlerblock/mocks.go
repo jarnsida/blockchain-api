@@ -2,7 +2,7 @@
 // Source: ./services.go
 
 // Package blockhandler is a generated GoMock package.
-package handlerblock
+package blockhandler
 
 import (
 	context "context"

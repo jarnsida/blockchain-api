@@ -2,7 +2,7 @@
 // Source: ./repositories.go
 
 // Package groupservice is a generated GoMock package.
-package servicegroup
+package groupservice
 
 import (
 	context "context"

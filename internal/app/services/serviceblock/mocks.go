@@ -2,7 +2,7 @@
 // Source: ./repositories.go
 
 // Package blockservice is a generated GoMock package.
-package serviceblock
+package blockservice
 
 import (
 	context "context"

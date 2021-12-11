@@ -2,7 +2,7 @@
 // Source: ./services.go
 
 // Package indexhandler is a generated GoMock package.
-package handlerindex
+package indexhandler
 
 import (
 	context "context"
