@@ -17,10 +17,22 @@
 
 API-server for blockchain indexes
 
+## Solution notes
+
+- :trident: clean architecture (handler->service->repository)
+- :book: standard Go project layout (well, more or less :blush:)
+- :cd: github CI/CD + docker compose + Makefile included
+- :white_check_mark: tests with mocks included
+- :heart: Swagger auto-generated on `make generate` included
+
 ## HOWTO
 
-- create account on https://infura.io/
-- create new project on https://infura.io/dashboard
-- copy Ropsten endpoint from Infura project settings to `INFURA_ENDPOINT` in `docker-compose.yml`
-- run with `make run`
+- :running_man: run app in docker-compose with `make dc`
+- :test_tube: run tests with `make test`
+- :coin: generate contract from `abi` file with `make abigen`
+- run linter with `make lint`
+
+## A picture is worth a thousand words
+
+<img src="./images/make-run.png">
 
