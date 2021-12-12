@@ -152,7 +152,8 @@ definitions:
         - 4
         - 5
         items:
-          $ref: '#/definitions/Int'
+          format: int64
+          type: integer
         type: array
       Name:
         example: DeFi Indexes

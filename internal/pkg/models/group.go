@@ -1,14 +1,12 @@
 package models
 
-import "math/big"
-
 // Group is a contract group.
 // swagger:model group
 type Group struct {
 	// example: DeFi Indexes
 	Name string
 	// example: [0,1,2,3,4,5]
-	Indexes []*big.Int
+	Indexes []int64
 }
 
 // Groups holds a list of group IDs.

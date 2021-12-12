@@ -17,7 +17,7 @@ import (
 
 // TestGetIndex tests indexhandler.Get
 func TestGetIndex(t *testing.T) {
-	var testIndexID int64 = 1
+	const testIndexID int64 = 1
 
 	log.SetOutput(ioutil.Discard)
 
