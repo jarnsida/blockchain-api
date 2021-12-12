@@ -22,7 +22,7 @@ API-server for blockchain indexes
 - :trident: clean architecture (handler->service->repository)
 - :book: standard Go project layout (well, more or less :blush:)
 - :cd: github CI/CD + docker compose + Makefile included
-- :white_check_mark: tests with mocks included
+- :white_check_mark: handler tests with mocks included
 - :heart: Swagger auto-generated on `make generate` included
 
 ## HOWTO
@@ -30,7 +30,7 @@ API-server for blockchain indexes
 - :running_man: run app in docker-compose with `make dc`
 - :test_tube: run tests with `make test`
 - :coin: generate contract from `abi` file with `make abigen`
-- run linter with `make lint`
+- :sunflower: run linter with `make lint`
 
 ## A picture is worth a thousand words
 
