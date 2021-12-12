@@ -1,3 +1,26 @@
+//go:generate swagger generate spec -m -o ../../swagger/swagger.yml
+
+// Package classification Blockchain API.
+//
+// API-server for blockchain indexes.
+//
+// Group and index data are taken from a smart contract, which is deployed on Ropsten (ETH test network) using go-ethereum.
+// For connecting to a smart contract you have to create your own Infura API key (see INFURA_ENDPOINT env var)
+//
+//
+//     Schemes: http
+//     Host: localhost
+//     BasePath: /v1
+//     Version: 0.0.1
+//     License: Apache 2.0 https://www.apache.org/licenses/LICENSE-2.0
+//     Contact: Eugene Toropov<eugene@go-masters.co>
+//
+//     Consumes:
+//
+//     Produces:
+//     - application/json
+//
+// swagger:meta
 package main
 
 import (
@@ -69,15 +92,18 @@ func run() error {
 	app.Use(logger.New())
 
 	// routes
-	app.Get("/groups", groupHandler.GetAll)
-	app.Get("/groups/:id", groupHandler.Get)
-	app.Get("/indexes/:id", indexHandler.Get)
-	app.Get("/blocks/:id", blockHandler.Get)
-	app.Get("/blocks/:id/header", blockHandler.GetHeader)
+	v1 := app.Group("/v1")
+	v1.Get("/groups", groupHandler.GetAll)
+	v1.Get("/groups/:id", groupHandler.Get)
+	v1.Get("/indexes/:id", indexHandler.Get)
+	v1.Get("/blocks/:id", blockHandler.Get)
+	v1.Get("/blocks/:id/header", blockHandler.GetHeader)
 
 	log.Printf("Running HTTP server on %s\n", cfg.HTTPAddr)
 
-	go func() { _ = app.Listen(cfg.HTTPAddr) }()
+	go func() {
+		log.Fatal(app.Listen(cfg.HTTPAddr))
+	}()
 
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)

@@ -1,0 +1,349 @@
+basePath: /v1
+definitions:
+  Address:
+    items:
+      format: uint8
+      type: integer
+    title: Address represents the 20 byte address of an Ethereum account.
+    type: array
+    x-go-package: github.com/ethereum/go-ethereum/common
+  BlockNonce:
+    description: |-
+      A BlockNonce is a 64-bit hash which proves (combined with the
+      mix-hash) that a sufficient amount of computation has been carried
+      out on a block.
+    items:
+      format: uint8
+      type: integer
+    type: array
+    x-go-package: github.com/ethereum/go-ethereum/core/types
+  Bloom:
+    items:
+      format: uint8
+      type: integer
+    title: Bloom represents a 2048 bit bloom filter.
+    type: array
+    x-go-package: github.com/ethereum/go-ethereum/core/types
+  Body:
+    description: |-
+      Body is a simple (mutable, non-safe) data container for storing and moving
+      a block's data contents (transactions and uncles) together.
+    properties:
+      Transactions:
+        items:
+          $ref: '#/definitions/Transaction'
+        type: array
+      Uncles:
+        items:
+          $ref: '#/definitions/Header'
+        type: array
+    type: object
+    x-go-package: github.com/ethereum/go-ethereum/core/types
+  Hash:
+    items:
+      format: uint8
+      type: integer
+    title: Hash represents the 32 byte Keccak256 hash of arbitrary data.
+    type: array
+    x-go-package: github.com/ethereum/go-ethereum/common
+  Header:
+    properties:
+      baseFeePerGas:
+        $ref: '#/definitions/Int'
+      difficulty:
+        $ref: '#/definitions/Int'
+      extraData:
+        items:
+          format: uint8
+          type: integer
+        type: array
+        x-go-name: Extra
+      gasLimit:
+        format: uint64
+        type: integer
+        x-go-name: GasLimit
+      gasUsed:
+        format: uint64
+        type: integer
+        x-go-name: GasUsed
+      logsBloom:
+        $ref: '#/definitions/Bloom'
+      miner:
+        $ref: '#/definitions/Address'
+      mixHash:
+        $ref: '#/definitions/Hash'
+      nonce:
+        $ref: '#/definitions/BlockNonce'
+      number:
+        $ref: '#/definitions/Int'
+      parentHash:
+        $ref: '#/definitions/Hash'
+      receiptsRoot:
+        $ref: '#/definitions/Hash'
+      sha3Uncles:
+        $ref: '#/definitions/Hash'
+      stateRoot:
+        $ref: '#/definitions/Hash'
+      timestamp:
+        format: uint64
+        type: integer
+        x-go-name: Time
+      transactionsRoot:
+        $ref: '#/definitions/Hash'
+    title: Header represents a block header in the Ethereum blockchain.
+    type: object
+    x-go-package: github.com/ethereum/go-ethereum/core/types
+  Int:
+    description: |-
+      Operations always take pointer arguments (*Int) rather
+      than Int values, and each unique Int value requires
+      its own unique *Int pointer. To "copy" an Int value,
+      an existing (or newly allocated) Int must be set to
+      a new value using the Int.Set method; shallow copies
+      of Ints are not supported and may lead to errors.
+    title: |-
+      An Int represents a signed multi-precision integer.
+      The zero value for an Int represents the value 0.
+    type: object
+    x-go-package: math/big
+  Transaction:
+    title: Transaction is an Ethereum transaction.
+    type: object
+    x-go-package: github.com/ethereum/go-ethereum/core/types
+  block:
+    properties:
+      Body:
+        $ref: '#/definitions/Body'
+      Header:
+        $ref: '#/definitions/Header'
+    title: Block is an Ethereum block as returned by Ethereum client.
+    type: object
+    x-go-name: Block
+    x-go-package: github.com/evt/blockchain-api/internal/pkg/models
+  blockNoBody:
+    properties:
+      Header:
+        $ref: '#/definitions/Header'
+    title: BlockNoBody is an Ethereum block with header only as returned by Ethereum
+      client.
+    type: object
+    x-go-name: BlockNoBody
+    x-go-package: github.com/evt/blockchain-api/internal/pkg/models
+  error:
+    properties:
+      error:
+        description: The error message
+        type: string
+        x-go-name: Error
+    required:
+    - error
+    title: Error is a generic error returned in API response.
+    type: object
+    x-go-name: Error
+    x-go-package: github.com/evt/blockchain-api/internal/pkg/models
+  group:
+    properties:
+      Indexes:
+        example:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        items:
+          $ref: '#/definitions/Int'
+        type: array
+      Name:
+        example: DeFi Indexes
+        type: string
+    title: Group is a contract group.
+    type: object
+    x-go-name: Group
+    x-go-package: github.com/evt/blockchain-api/internal/pkg/models
+  groupIDs:
+    properties:
+      group_ids:
+        example:
+        - 12
+        - 13
+        items:
+          format: int64
+          type: integer
+        type: array
+        x-go-name: GroupIDs
+    title: Groups holds a list of group IDs.
+    type: object
+    x-go-name: Groups
+    x-go-package: github.com/evt/blockchain-api/internal/pkg/models
+  index:
+    properties:
+      EthPriceInWei:
+        example: 150000000000000000
+        format: int64
+        type: integer
+      Name:
+        example: DeFi Index (1)
+        type: string
+      PercentageChange:
+        example: -45
+        format: int64
+        type: integer
+      UsdCapitalization:
+        example: 250000000
+        format: int64
+        type: integer
+      UsdPriceInCents:
+        example: 9500
+        format: int64
+        type: integer
+    title: Index is a contract index.
+    type: object
+    x-go-name: Index
+    x-go-package: github.com/evt/blockchain-api/internal/pkg/models
+host: localhost
+info:
+  contact:
+    email: eugene@go-masters.co
+    name: Eugene Toropov
+  description: |-
+    API-server for blockchain indexes.
+
+    Group and index data are taken from a smart contract, which is deployed on Ropsten (ETH test network) using go-ethereum.
+    For connecting to a smart contract you have to create your own Infura API key (see INFURA_ENDPOINT env var)
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  title: Blockchain API.
+  version: 0.0.1
+paths:
+  /blocks/:id:
+    get:
+      description: |-
+        Returns block by ID which can be block number, block hash or "latest".
+        Block hash is identified as "0x...".
+      operationId: getBlock
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: block
+          schema:
+            $ref: '#/definitions/block'
+        "400":
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      summary: Returns block info from Ropsten.
+      tags:
+      - blocks
+  /blocks/:id/header:
+    get:
+      description: |-
+        Returns block header by ID which can be block number, block hash or "latest".
+        Block hash is identified as "0x...".
+      operationId: getBlockHeader
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: blockNoBody
+          schema:
+            $ref: '#/definitions/blockNoBody'
+        "400":
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      summary: Returns block info from Ropsten (header only).
+      tags:
+      - blocks
+  /groups:
+    get:
+      description: This will show all available contract groups.
+      operationId: getGroups
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: groupIDs
+          schema:
+            $ref: '#/definitions/groupIDs'
+        "400":
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      summary: Lists all contract groups.
+      tags:
+      - groups
+  /groups/:id:
+    get:
+      description: This will show name and indexes for a smart contract group with
+        provided ID (if any).
+      operationId: getGroup
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: group
+          schema:
+            $ref: '#/definitions/group'
+        "400":
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      summary: Returns contract group info.
+      tags:
+      - groups
+  /indexes/:id:
+    get:
+      description: This will show contract index info.
+      operationId: getIndex
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: index
+          schema:
+            $ref: '#/definitions/index'
+        "400":
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+        default:
+          description: error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      summary: Lists contract index info.
+      tags:
+      - indexes
+produces:
+- application/json
+schemes:
+- http
+swagger: "2.0"

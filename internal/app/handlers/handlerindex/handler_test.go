@@ -8,7 +8,6 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
-	"math/big"
 	"net/http/httptest"
 	"testing"
 
@@ -41,10 +40,10 @@ func TestGetIndex(t *testing.T) {
 			expect: func() {
 				indexService.EXPECT().GetIndex(gomock.Any(), testIndexID).Return(&models.Index{
 					Name:              "DeFi Index (3)",
-					EthPriceInWei:     big.NewInt(350000000000000000),
-					UsdPriceInCents:   big.NewInt(8500),
-					UsdCapitalization: big.NewInt(270000000),
-					PercentageChange:  big.NewInt(25),
+					EthPriceInWei:     350000000000000000,
+					UsdPriceInCents:   8500,
+					UsdCapitalization: 270000000,
+					PercentageChange:  25,
 				}, nil)
 			},
 			assert: func(content []byte) {

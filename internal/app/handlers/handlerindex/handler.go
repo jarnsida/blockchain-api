@@ -21,6 +21,23 @@ func New(indexService IndexService) *IndexHandler {
 
 // Get handles GET /indexes/:id request.
 func (h *IndexHandler) Get(c *fiber.Ctx) error {
+
+	// swagger:route GET /indexes/:id indexes getIndex
+	//
+	// Lists contract index info.
+	//
+	// This will show contract index info.
+	//
+	//     Produces:
+	//     - application/json
+	//
+	//     Schemes: http
+	//
+	//     Responses:
+	//       default: body:error
+	//       200: body:index
+	//       400: body:error
+
 	indexIDStr := c.Params("id")
 	indexID, err := strconv.ParseInt(indexIDStr, 10, 64)
 	if err != nil {

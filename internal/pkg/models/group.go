@@ -2,8 +2,18 @@ package models
 
 import "math/big"
 
-// Group is a contract group
+// Group is a contract group.
+// swagger:model group
 type Group struct {
-	Name    string
+	// example: DeFi Indexes
+	Name string
+	// example: [0,1,2,3,4,5]
 	Indexes []*big.Int
+}
+
+// Groups holds a list of group IDs.
+// swagger:model groupIDs
+type Groups struct {
+	// example: [12,13]
+	GroupIDs []int64 `json:"group_ids"`
 }

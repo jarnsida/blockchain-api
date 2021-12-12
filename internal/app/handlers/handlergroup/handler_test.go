@@ -39,7 +39,7 @@ func TestGetAll(t *testing.T) {
 				groupService.EXPECT().GetGroupIDs(gomock.Any()).Return([]int64{12, 13}, nil)
 			},
 			assert: func(content []byte) {
-				assert.Equal(t, []byte("[12,13]"), content)
+				assert.Equal(t, []byte("{\"group_ids\":[12,13]}"), content)
 			},
 		},
 		{

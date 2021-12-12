@@ -2,6 +2,7 @@ package handlergroup
 
 import (
 	"github.com/evt/blockchain-api/internal/app/handlers/ctx"
+	"github.com/evt/blockchain-api/internal/pkg/models"
 	"github.com/gofiber/fiber/v2"
 	"net/http"
 	"strconv"
@@ -21,38 +22,49 @@ func New(groupService GroupService) *GroupHandler {
 
 // GetAll handles GET /groups request.
 func (h *GroupHandler) GetAll(c *fiber.Ctx) error {
-	groups, err := h.groupService.GetGroupIDs(c.Context())
-	if err != nil {
-		return ctx.Error(c, http.StatusInternalServerError, err)
-	}
 
-	return c.JSON(groups)
-}
-
-// Get handles GET /groups/:id request.
-func (h *GroupHandler) Get(c *fiber.Ctx) error {
-
-	// swagger:route GET /groups/:id groups getGroups
+	// swagger:route GET /groups groups getGroups
 	//
 	// Lists all contract groups.
 	//
 	// This will show all available contract groups.
-	//
-	//     Consumes:
 	//
 	//     Produces:
 	//     - application/json
 	//
 	//     Schemes: http
 	//
-	//     Deprecated: false
+	//     Responses:
+	//       default: body:error
+	//       200: body:groupIDs
+	//       400: body:error
+
+	groups, err := h.groupService.GetGroupIDs(c.Context())
+	if err != nil {
+		return ctx.Error(c, http.StatusInternalServerError, err)
+	}
+
+	return c.JSON(models.Groups{GroupIDs: groups})
+}
+
+// Get handles GET /groups/:id request.
+func (h *GroupHandler) Get(c *fiber.Ctx) error {
+
+	// swagger:route GET /groups/:id groups getGroup
 	//
-	//     Security:
+	// Returns contract group info.
+	//
+	// This will show name and indexes for a smart contract group with provided ID (if any).
+	//
+	//     Produces:
+	//     - application/json
+	//
+	//     Schemes: http
 	//
 	//     Responses:
-	//       default: genericError
-	//       200: group
-	//       400: validationError
+	//       default: body:error
+	//       200: body:group
+	//       400: body:error
 
 	groupIDStr := c.Params("id")
 	groupID, err := strconv.ParseInt(groupIDStr, 10, 64)

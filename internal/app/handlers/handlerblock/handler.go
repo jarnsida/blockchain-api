@@ -25,6 +25,25 @@ func New(blockService BlockService) *BlockHandler {
 
 // Get returns block by number or hash or "latest"
 func (h *BlockHandler) Get(c *fiber.Ctx) error {
+
+	// swagger:route GET /blocks/:id blocks getBlock
+	//
+	// Returns block info from Ropsten.
+	//
+	// Returns block by ID which can be block number, block hash or "latest".
+	// Block hash is identified as "0x...".
+	//
+	//
+	//     Produces:
+	//     - application/json
+	//
+	//     Schemes: http
+	//
+	//     Responses:
+	//       default: body:error
+	//       200: body:block
+	//       400: body:error
+
 	blockIDStr := c.Params("id")
 	var (
 		block       *models.Block
@@ -60,6 +79,24 @@ func (h *BlockHandler) Get(c *fiber.Ctx) error {
 
 // GetHeader returns block header by number or hash or "latest"
 func (h *BlockHandler) GetHeader(c *fiber.Ctx) error {
+
+	// swagger:route GET /blocks/:id/header blocks getBlockHeader
+	//
+	// Returns block info from Ropsten (header only).
+	//
+	// Returns block header by ID which can be block number, block hash or "latest".
+	// Block hash is identified as "0x...".
+	//
+	//     Produces:
+	//     - application/json
+	//
+	//     Schemes: http
+	//
+	//     Responses:
+	//       default: body:error
+	//       200: body:blockNoBody
+	//       400: body:error
+
 	blockIDStr := c.Params("id")
 	var (
 		block       *models.Block
@@ -90,5 +127,9 @@ func (h *BlockHandler) GetHeader(c *fiber.Ctx) error {
 		}
 	}
 
-	return c.JSON(block)
+	blockNoBody := models.BlockNoBody{
+		Header: block.Header,
+	}
+
+	return c.JSON(blockNoBody)
 }
